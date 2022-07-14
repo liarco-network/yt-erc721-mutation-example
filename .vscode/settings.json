@@ -1,0 +1,4 @@
+{
+  "solidity.packageDefaultDependenciesDirectory": "hardhat/node_modules",
+  "editor.tabSize": 2
+}
