@@ -85,7 +85,7 @@ contract MutatedToken is IMutatedToken, ERC721A, Ownable, ReentrancyGuard {
     uint256 _startId,
     uint256 _endId,
     uint256 _startBalance
-  ) public view returns(MutationStatus[] memory) {
+  ) public view returns(MutationStatus[] memory, bool) {
     uint256 ownerBalance = GENESIS_TOKEN_CONTRACT.balanceOf(_owner) - _startBalance;
     MutationStatus[] memory tokensData = new MutationStatus[](ownerBalance);
     uint256 currentOwnedTokenIndex = 0;
@@ -102,7 +102,7 @@ contract MutatedToken is IMutatedToken, ERC721A, Ownable, ReentrancyGuard {
       mstore(tokensData, currentOwnedTokenIndex)
     }
 
-    return tokensData;
+    return (tokensData, currentOwnedTokenIndex < ownerBalance);
   }
 
   function setUriPrefix(string memory _uriPrefix) public onlyOwner {
